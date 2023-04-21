@@ -11,15 +11,21 @@ datasource db {
 }
 
 model User {
-   id          Int    @id @default(autoincrement())
-   name        String
-   preferences Json
-   blob        Bytes
+   id           String @id @default(uuid())
+   name         String
+   preferences  Json
+   blob         Bytes
+   writtenPost  Post[] @relation("WrittenPosts")
+   favoritePost Post[] @relation("FavoritePosts")
 }
 
 model Post {
-   rating    Decimal
-   createdat DateTime
-   updatedAt DateTime
-   id        Int      @id @default(autoincrement())
+   id            String   @id @default(uuid())
+   rating        Decimal
+   createdat     DateTime
+   updatedAt     DateTime
+   author        User     @relation("WrittenPosts", fields: [auhtorId], references: [id])
+   auhtorId      String
+   favoritedBy   User     @relation("FavoritePosts", fields: [favoritedById], references: [id])
+   favoritedById String
 }
