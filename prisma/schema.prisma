@@ -16,7 +16,6 @@ model User {
    name            String
    email           String          @unique
    role            Role            @default(BASIC)
-   userPreferences Json
    writtenPost     Post[]          @relation("WrittenPosts")
    favoritePost    Post[]          @relation("FavoritePosts")
    userPreference  UserPreference?
