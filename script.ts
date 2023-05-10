@@ -13,6 +13,9 @@ async function main() {
                emailUpdates: true
             } 
          }
+      },
+      include: {
+         userPreference: true
       }
    })
    console.log(user)
