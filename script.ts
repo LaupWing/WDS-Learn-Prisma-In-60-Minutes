@@ -3,6 +3,18 @@ const prisma = new PrismaClient()
 
 async function main() {
    await prisma.user.deleteMany()
+
+   const uniqueUser = await prisma.user.findUnique({
+      where: {
+         age_name: {
+            name: "Kyle",
+            age: 27
+         }
+      }
+   })
+
+   console.log(uniqueUser)
+   
    const user = await prisma.user.create({
       data: {
          name: "Kyle",
